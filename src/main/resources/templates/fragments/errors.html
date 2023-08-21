@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="errors" th:if="${errors != null}">
+    <h1 class="bold-white-text center-text">ERRORS</h1>
+    <table class="table table-bordered table-striped">
+        <tr th:each="error:${errors}">
+            <td th:text="${error}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

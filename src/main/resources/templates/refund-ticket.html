@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <div>
+        <form method="get" th:action="@{/current-tickets}">
+            <button class="btn btn-primary">Back to Current Tickets</button>
+        </form>
+    </div>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Movie</th>
+            <th>Showroom</th>
+            <th>Showtime</th>
+            <th>Endtime</th>
+            <th>Seat</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Time of Purchase</th>
+        </tr>
+        <tr>
+            <td th:text="${ticket.movieTitle}"></td>
+            <td th:text="${ticket.showroomLetter}"></td>
+            <td th:text="${ticket.showDateTimeFormatted()}"></td>
+            <td th:text="${ticket.endDateTimeFormatted()}"></td>
+            <td th:text="${ticket.seatDesignation}"></td>
+            <td th:text="${ticket.ticketStatus}"></td>
+            <td th:text="${ticket.ticketTypeFormatted()}"></td>
+            <td th:text="${ticket.creationDateTimeFormatted()}"></td>
+        </tr>
+    </table>
+    <br/>
+    <div th:if="${ticket.isRefundable}">
+        <span>You're in luck! Your ticket qualifies for an immediate refund!</span>
+        <br/>
+        <span>Just click the button below to finalize the refund process!</span>
+        <br/>
+        <form method="post" th:action="@{/refund-ticket/{id}(id=${ticket.id})}">
+            <button class="btn btn-success">Refund Ticket</button>
+        </form>
+    </div>
+    <div th:unless="${ticket.isRefundable}">
+        <span>Sorry but this ticket no longer qualifies for a refund</span>
+    </div>
+</div>
+
+</body>
+</html>

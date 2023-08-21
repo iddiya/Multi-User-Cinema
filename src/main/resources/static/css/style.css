@@ -1,0 +1,820 @@
+body {
+    font-family: sans-serif;
+    background-color: black;
+}
+
+.line-breaks {
+    white-space: pre-wrap;
+}
+
+.table {
+    align-content: center;
+    align-self: center;
+    border-radius: 5px;
+    width: fit-content;
+    margin: 0 auto;
+    float: none;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.white-text {
+    color: white;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.bold-white-text {
+    font-weight: bold;
+    color: white;
+}
+
+.highlight {
+    background: red;
+}
+
+td, tr {
+    font-size: 1em;
+    padding: 5px;
+    color: white;
+}
+
+td img {
+    vertical-align: middle;
+}
+
+.image-hover {
+    background-color: red;
+    display: inline-block;
+}
+
+.image-hover img:hover {
+    opacity: .5;
+}
+
+table.table-hover td:hover {
+    background: red;
+    font-style: italic;
+}
+
+.moviesContainer .table-bordered {
+    border-color: red;
+    text-align: left;
+}
+
+.logo {
+    color: orangered;
+    text-transform: uppercase;
+    font-family: Limelight, serif;
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+    letter-spacing: 2px;
+    margin: 0 auto 0 20px;
+}
+
+.logo span {
+    font-size: 10px;
+    margin-left: 5px;
+    width: auto;
+    letter-spacing: 2px;
+    font-family: Limelight, sans-serif;
+}
+
+/* Navbar container */
+.navbar {
+    background-color: #333;
+    font-family: Arial, serif;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS),
+and when you move the mouse over it (hover) */
+.collapsible:hover {
+    background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+.naviBar {
+    font-size: larger;
+    padding: 30px 50px;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+}
+
+.notification span {
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 18px auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.bannerBox {
+    width: 1200px;
+    height: 450px;
+    box-shadow: 2px 2px 10px black;
+    border: 2px solid black;
+    position: relative;
+    overflow: hidden;
+}
+
+.bannerImg {
+    width: 100%;
+    height: 100%;
+}
+
+.bannerImg img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bannerTxt {
+    background: linear-gradient(360deg, #161616b9 35%, rgba(73, 73, 73, 0) 64%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 30px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bannerTxt .movieName {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bannerTxt .movieName span {
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: beige
+}
+
+.bannerTxt .movieName strong,
+.bannerTxt .movieName a {
+    margin-top: 5px;
+    color: beige;
+    letter-spacing: 1px;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.bannerTxt .category {
+    color: grey;
+    font-size: 12px;
+}
+
+.bannerTxt .category a {
+    color: orangered;
+}
+
+.bannerTxt .movieCategory {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.searchBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 15px;
+    background-color: gray;
+    padding: 5px 15px;
+    border-radius: 15px;
+    height: 40px;
+}
+
+.searchBar input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.searchBar input::placeholder {
+    color: black;
+}
+
+.searchBar button {
+    font-weight: bold;
+    font-size: 16px;
+    border: black;
+    outline: black;
+    cursor: pointer;
+    color: white;
+}
+
+.paymentCard {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+}
+
+.paymentCard button {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    border: black;
+    outline: none;
+    cursor: pointer;
+    color: black;
+}
+
+.paymentCard h1 {
+    text-align: center;
+    padding: 20px 0;
+    color: orangered;
+}
+
+.paymentCard td {
+    color: black;
+}
+
+.paymentCard h2 {
+    text-align: center;
+    padding: 8px 0;
+}
+
+.paymentCard form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.login {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+}
+
+.login button {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    border: black;
+    outline: none;
+    cursor: pointer;
+    color: black;
+}
+
+.login h1 {
+    text-align: center;
+    padding: 20px 0;
+    color: orangered;
+}
+
+.login td {
+    color: black;
+}
+
+.login h2 {
+    text-align: center;
+    padding: 8px 0;
+}
+
+.login form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .inputField {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.inputField input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.inputField label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.inputField span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: orangered;
+    transition: .5s;
+}
+
+.inputField input:focus~label,
+.inputField input:valid~label {
+    top: -5px;
+    color: orangered;
+}
+
+.inputField input:focus~span::before,
+.inputField input:valid~span::before {
+    width: 100%;
+}
+
+.forgot {
+    margin: -5px 0 20px 5px;
+    color: silver;
+    cursor: pointer;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+#pageNumbers ul {
+    list-style: none;
+}
+
+#pageNumbers li {
+    display: inline;
+}
+
+button[type="submit"] {
+    border: 1px solid;
+    background: orangered;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"] {
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    background: orangered;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:hover {
+    border-color: #2691d9;
+}
+
+.signUp {
+    margin: 30px 0;
+    background: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #666666;
+}
+
+.signUp a {
+    color: orangered;
+}
+
+.signUp a:hover {
+    text-decoration: underline;
+}
+
+#nowPlaying {
+    max-width: 1200px;
+    margin: 250px auto;
+    width: 100%;
+}
+
+.nowHead {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #0e0e0ec2;
+    border: 1px solid #161616b9;
+}
+
+.nowHead h1 {
+    color: beige;
+    font-size: 32px;
+}
+
+.box {
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+    border: 1px solid gray;
+    box-shadow: 2px 2px 32px black;
+    position: relative;
+}
+
+.box .boxImg {
+    width: 100%;
+    height: 100%;
+}
+
+.box .boxImg img {
+    object-position: center;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.bannerTxt .movieName a:hover {
+    opacity: .8;
+    transition: all ease 0.3s;
+}
+
+.error {
+    position: static;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+}
+
+.error .each {
+    font-size: 24px;
+    color: red;
+}
+
+.success {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+}
+
+.success .text {
+    font-size: 24px;
+    color: red;
+}
+
+.moviesContainer {
+    text-align: left;
+    width: 80%;
+    margin: auto;
+}
+
+.moviesContainer h1 {
+    color: white;
+}
+
+.movies {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 5vw);
+    grid-gap: 24px;
+}
+
+.movie__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.movies1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.movies2 {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.movies3 {
+    grid-column-start: 5;
+    grid-column-end: 7;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.movies4 {
+    grid-column-start: 7;
+    grid-column-end: 9;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.movies5 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
+
+.movies6 {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
+
+.center {
+    padding-left: 500px;
+}
+
+.centerelement {
+    padding-left: 75px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.container {
+    width: 60%;
+    background-color: black;
+    color: white;
+    margin: auto;
+    z-index: auto;
+}
+
+.centerbutton {
+    padding-left: 30%;
+}
+
+.down {
+    padding-top: 100px;
+    margin-top: 20%;
+}
+
+.profcontainer {
+    background-color: white;
+    color: black;
+    padding-top: 200px;
+    padding-left: 150px;
+    position: absolute;
+    margin: 20px 0;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 25px;
+}
+
+.container button {
+    background-color: orangered;
+    white-space: nowrap;
+    color: white;
+    border-radius: 12px;
+    padding: 25px;
+}
+
+.moviesContainer button {
+    background-color: orangered;
+    white-space: nowrap;
+    color: white;
+    border-radius: 10px;
+}
+
+.profcontainer button {
+    background-color: orangered;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.button {
+    background-color: orangered;
+    color: white;
+    border-radius: 20px;
+    padding: 15px;
+    display: inline;
+}
+
+.button:hover {
+    background-color: red;
+    color: yellow;
+    font-style: italic;
+}
+
+.profileContainer {
+    border-right: 200px solid black;
+    border-left: 200px solid black;
+    height: 70vh;
+    padding-top: 75px;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
+
+.row {
+    padding-left: 100px;
+}
+
+.profileContainerManagement {
+    border-right: 200px solid black;
+    border-left: 200px solid black;
+    height: 70vh;
+    padding-top: 75px;
+    text-align: center;
+    background-color: white;
+}
+
+.profileContainerManagement button {
+    background-color: orangered;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.profileContainer table {
+    margin: auto;
+}
+
+.card {
+    width: 350px;
+    height: 470px;
+    background-color: #fff;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden
+}
+
+.card .info {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e1dede;
+    background-color: #e5e5e5
+}
+
+.card .info button {
+    align-content: center;
+    align-self: center;
+    height: 30px;
+    width: 80px;
+    padding: 3px;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    text-transform: uppercase
+}
+
+.card .forms {
+    padding: 15px
+}
+
+.card .inputs {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px
+}
+
+.card .inputs span {
+    font-size: 12px
+}
+
+.card .inputs input {
+    height: 40px;
+    padding: 0 10px;
+    font-size: 17px;
+    box-shadow: none;
+    outline: none
+}
+
+.card .inputs input[type="text"][readonly] {
+    border: 2px solid rgba(0, 0, 0, 0)
+}
+
+.availableTime {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    color: #fff;
+}
+
+.bookContainer {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+}
+
+/* The sidebar menu */
+.sidenav {
+    width: 120px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 50px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar
+(less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}

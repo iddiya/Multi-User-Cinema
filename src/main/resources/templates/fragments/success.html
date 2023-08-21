@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="success">
+    <div th:if="${success != null}">
+        <span class="bold-white-text center-text" style="font-size: xx-large" th:text="${success}"></span>
+    </div>
+</div>
+</body>
+</html>

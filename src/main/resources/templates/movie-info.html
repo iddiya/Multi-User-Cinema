@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <form method="get" th:action="@{/movies}">
+        <button class="btn btn-outline-primary">Go Back to Movies page</button>
+    </form>
+    <br/>
+    <h1 th:text="${movie.title}"></h1>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>
+                <a th:href="@{/movie-screenings(id=${movie.id})}" class="btn btn-primary">Screenings</a>
+            </td>
+            <td>
+                <a th:href="@{/movie-reviews(id=${movie.id})}" class="btn btn-primary">Reviews</a>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>
+                <img th:src="${movie.image}" width="300" height="400" src="" alt="">
+            </td>
+            <td>
+                <iframe width="400" height="300" th:src="${movie.trailer}"></iframe>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <table th:if="${avgRating >= 1}" class="table table-bordered table-striped">
+        <tbody>
+        <tr>
+            <td>
+                <span style="alignment: center; color: white">Average Rating Out Of 10 Stars:</span>
+            </td>
+            <td>
+                <span style="alignment: center" th:each="star:${#numbers.sequence(1,avgRating)}">
+                    <img th:src="@{/img/star.png}" width="50" height="50" src="" alt="">
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="moviesContainer">
+    <table class="table table-bordered table-striped" style="border: red solid 2px">
+        <tbody>
+        <tr>
+            <td class="boldtext">Director</td>
+            <td th:text="${movie.director}"></td>
+        </tr>
+        <tr>
+            <td class="boldtext">Synopsis</td>
+            <td th:text="${movie.synopsis}"></td>
+        </tr>
+        <tr>
+            <td class="boldtext">Duration</td>
+            <td th:text="${movie.duration}"></td>
+        </tr>
+        <tr>
+            <td class="boldtext">Release Date</td>
+            <td th:text="${movie.releaseDate.getMonth()} + '-' +
+                         ${movie.releaseDate.getDayOfMonth()} + '-' +
+                         ${movie.releaseDate.getYear()}">
+            </td>
+        </tr>
+        <tr>
+            <td class="boldtext">MSRB Rating</td>
+            <td th:text="${movie.msrbRating}"></td>
+        </tr>
+        <tr>
+            <td class="boldtext">Cast</td>
+            <td>
+                <span th:each="cast,iterStat:${movie.cast}"
+                      th:text="${!iterStat.last} ? ${cast} + ', ': ${cast}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="boldtext">Writers</td>
+            <td>
+                <span th:each="writer,iterStat:${movie.writers}"
+                      th:text="${!iterStat.last} ? ${writer} + ', ': ${writer}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="boldtext">Categories</td>
+            <td>
+                <span th:each="category,iterStat:${movie.movieCategories}"
+                      th:text="${!iterStat.last} ? ${category} + ', ': ${category}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>

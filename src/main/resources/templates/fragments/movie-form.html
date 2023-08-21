@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="movie-form(action, movieForm)">
+    <form id="cascading-form" method="post" th:action="@{${action}(id=${movieForm.id})}" th:object="${movieForm}">
+        <table class="table table-striped table-bordered align-content-lg-center align-text-top">
+            <tr>
+                <td>
+                    <span class="bold-white-text">Title:</span>
+                </td>
+                <td>
+                    <label>
+                        <input type="text" th:field="*{title}" maxlength="40" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Director:</span>
+                </td>
+                <td>
+                    <label>
+                        <input type="text" th:field="*{director}" maxlength="40" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Image Link:</span>
+                </td>
+                <td>
+                    <label>
+                        <input type="text" th:field="*{image}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Trailer Embed Link:</span>
+                </td>
+                <td>
+                    <label>
+                        <input type="text" th:field="*{trailer}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Synopsis:</span>
+                </td>
+                <td>
+                    <label>
+                        <textarea type="text" rows="20" cols="75"
+                                  minlength="25" maxlength="1999" th:field="*{synopsis}" required>
+                        </textarea>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Release Date:</span>
+                </td>
+                <td>
+                    <label>
+                        <input type="date" th:field="*{releaseDate}" th:value="${maxDate}"
+                               th:min="${minDate}" th:max="${maxDate}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Duration:</span>
+                </td>
+                <td>
+                    <table>
+                        <td>
+                            <span class="bold-white-text">Hours:</span>
+                        </td>
+                        <td>
+                            <label>
+                                <select th:field="*{duration.hours}" required>
+                                    <option selected disabled value="">Choose hours</option>
+                                    <option th:each="hour:${#numbers.sequence(0,6)}"
+                                            th:text="${hour}" th:value="${hour}"></option>
+                                </select>
+                            </label>
+                        </td>
+                        <td>
+                            <span class="bold-white-text">Minutes:</span>
+                        </td>
+                        <td>
+                            <label>
+                                <select th:field="*{duration.minutes}" required>
+                                    <option selected disabled value="">Choose Minutes</option>
+                                    <option th:each="minute:${#numbers.sequence(0, 59)}"
+                                            th:text="${minute}" th:value="${minute}"></option>
+                                </select>
+                            </label>
+                        </td>
+                    </table>
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">MSRB Rating:</span>
+                </td>
+                <td>
+                    <label>
+                        <select th:field="*{msrbRating}">
+                            <option th:each="rating:${T(com.ecinema.app.domain.enums.MsrbRating).values()}"
+                                    th:text="${rating}" th:value="${rating}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Cast Member 1:</span>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{cast[0]}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Cast Member 2:</span>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{cast[1]}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Cast Member 3:</span>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{cast[2]}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Writer 1:</span>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{writers[0]}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Writer 2:</span>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{writers[1]}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Writer 3:</span>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{writers[2]}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="bold-white-text">Movie Categories:</span>
+                </td>
+                <td>
+                    <label>
+                        <ul class="list-unstyled">
+                            <li th:each="movieCategory:${T(com.ecinema.app.domain.enums.MovieCategory).values()}">
+                                <label>
+                                    <input type="checkbox" th:field="*{movieCategories}"
+                                           th:value="${movieCategory}" th:text="'  ' + ${movieCategory}">
+                                </label>
+                            </li>
+                        </ul>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

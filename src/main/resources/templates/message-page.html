@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="info bold-white-text center-text line-breaks">
+    <span th:if="${message != null}" th:text="${message}" style="font-size: x-large"></span>
+</div>
+<div class="centerbutton" th:if="${redirectLink != null}">
+    <form method="get" th:action="@{${redirectLink}}">
+        <button class="btn btn-primary" th:text="${redirectMessage}"></button>
+    </form>
+</div>
+</body>
+</html>

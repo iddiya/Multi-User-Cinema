@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <h1 class="bold-white-text center-text">Register</h1>
+    <br/>
+    <form method="post" th:action="@{/admin-create-new-account}" th:object="${registrationForm}">
+        <table>
+            <tr>
+                <td>Email:</td>
+                <td>
+                    <label>
+                        <input th:field="*{email}" type="text" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td>
+                    <label>
+                        <input th:field="*{username}" type="text" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <label>
+                        <input th:field="*{password}" type="password" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Confirm Password:</td>
+                <td>
+                    <label>
+                        <input th:field="*{confirmPassword}" type="password" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>First Name:</td>
+                <td>
+                    <label>
+                        <input th:field="*{firstName}" type="text" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>
+                    <label>
+                        <input th:field="*{lastName}" type="text" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Birth Date:</td>
+                <td>
+                    <label>
+                        <input th:field="*{birthDate}" th:value="*{birthDate}" type="date"
+                               th:min="${minDate}" th:max="${maxDate}" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Security Question 1:</td>
+                <td>
+                    <label>
+                        <select id='SQ1' th:field="*{securityQuestion1}" onchange="checkDropDowns(this)" required>
+                            <option value="" selected disabled>Choose Security Question 1</option>
+                            <option th:each="sq : ${securityQuestions}" th:value="${sq}" th:text="${sq}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Security Answer 1:</td>
+                <td><label><input th:field="*{securityAnswer1}" type="text"></label></td>
+            </tr>
+            <tr>
+                <td>Security Question 2:</td>
+                <td>
+                    <label>
+                        <select id='SQ2' th:field="*{securityQuestion2}" onchange="checkDropDowns(this)" required>
+                            <option value="" selected disabled>Choose Security Question 2</option>
+                            <option th:each="sq : ${securityQuestions}" th:value="${sq}" th:text="${sq}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Security Answer 2:</td>
+                <td>
+                    <label>
+                        <input th:field="*{securityAnswer2}" type="text">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="submit"></td>
+            </tr>
+            <tr>
+                <td>User Authorities:</td>
+                <td>
+                    <li th:each="authority:${T(com.ecinema.app.domain.enums.UserAuthority).values()}">
+                        <label>
+                            <input type="checkbox" th:field="*{authorities}"
+                                   th:value="${authority}" th:text="${authority}">
+                        </label>
+                    </li>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    window.checkDropDowns = function (thisSelect) {
+        let otherSelectId = ('SQ1' === thisSelect.id) ? 'SQ2' : 'SQ1';
+        let otherSelect = document.getElementById(otherSelectId);
+        for (let i = 0; i < otherSelect.options.length; i++) {
+            if (otherSelect.options[i].value === thisSelect.value) {
+                otherSelect.options[i].setAttribute('hidden', 'hidden');
+            } else {
+                otherSelect.options[i].removeAttribute('hidden');
+            }
+        }
+    }
+</script>
+</body>
+</html>

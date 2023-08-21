@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:insert="fragments/header :: header"></div>
+</head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <div th:insert="fragments/success :: success"></div>
+    <br/>
+    <div>
+        <a th:href="@{/movie-screenings(id=${screening.movieId})}" class="btn btn-primary">
+            Back to Screenings Page</a>
+    </div>
+    <div class="bold-white-text center-text">
+        <h1 th:text="'Book screening seat for ' + ${screening.movieTitle}"></h1>
+        <h1 th:text="'Showtime: ' + ${screening.showDateTimeFormatted()}"></h1>
+        <h1 th:text="'Endtime: ' + ${screening.endDateTimeFormatted()}"></h1>
+        <h1 th:text="'Showroom ' + ${screening.showroomLetter}"></h1>
+    </div>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tbody>
+        <tr th:each="rowEntry : ${mapOfScreeningSeats}">
+            <td th:each="seat : ${rowEntry.value}">
+                <a th:unless="${seat.isBooked}" th:href="@{/book-seat(seatId=${seat.id}, screeningId=${screening.id})}"
+                   class="btn btn-primary" th:text="${seat.seatDesignation()}"></a>
+                <span th:if="${seat.isBooked}" style="alignment: center">
+                    <h1 style="color: red; font-size: medium;">X</h1>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <span th:unless="${userIsCustomer}">Cannot book seats if you're not logged in as a Customer</span>
+</div>
+</body>
+</html>

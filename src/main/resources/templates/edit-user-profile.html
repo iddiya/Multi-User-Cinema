@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/back-to-profile-page :: back-to-profile-page"></div>
+    <div th:insert="fragments/errors :: errors"></div>
+    <h1 class="bold-white-text center-text">Edit Profile</h1>
+    <form method="post" th:action="@{/edit-user-profile}" th:object="${profileForm}">
+        <table class="table table-bordered table-active">
+            <tr>
+                <td>First Name:</td>
+                <td>
+                    <label><input th:field="*{firstName}" type="text"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>
+                    <label><input th:field="*{lastName}" type="text"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>Birth Date:</td>
+                <td>
+                    <label><input th:field="*{birthDate}" th:value="${profileForm.birthDate}"
+                                  type="date" th:min="${minDate}" th:max="${maxDate}"></label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

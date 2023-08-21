@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <a th:href="@{/view-seats(id=${screeningId})}" class="btn btn-primary">Go Back to Seats page</a>
+    <br/><br/>
+    <div class="bold-white-text center-text">
+        <h1 th:text="'Book screening seat for ' + ${screening.movieTitle}"></h1>
+        <h1 th:text="'Showtime: ' + ${screening.showDateTimeFormatted()}"></h1>
+        <h1 th:text="'Endtime: ' + ${screening.endDateTimeFormatted()}"></h1>
+        <h1 th:text="'Showroom: ' + ${screening.showroomLetter}"></h1>
+        <h1 th:text="'Seat Designation: ' + ${screeningSeat.seatDesignation()}"></h1>
+    </div>
+    <br/>
+    <div class="bold-white-text center-text">
+        <span>WARNING: A ticket CANNOT be refunded once the showtime is 3 days or less away.</span>
+        <br/>
+        <span>However, you can still refund the ticket if the showtime is more than 3 days away.</span>
+        <br/>
+        <br/>
+        <span>One token is equivalent to $1. Even if you have enough tokens to fully pay</span>
+        <br/>
+        <span>for this transaction, you must still choose a payment card below.</span>
+        <br/>
+        <span>Your card will not be charged if the tokens cover the cost of this transaction.</span>
+    </div>
+    <br/>
+    <form method="post" th:action="@{/book-seat}" th:object="${seatBookingForm}">
+        <table class="table table-bordered table-striped">
+            <label>
+                <input hidden th:field="*{screeningSeatId}" id="screeningSeatId">
+            </label>
+            <tr>
+                <td>Ticket Type:</td>
+                <td>
+                    <label>
+                        <select th:field="*{ticketType}">
+                            <option selected disabled value="">Choose Ticket Type</option>
+                            <option th:each="type:${T(com.ecinema.app.domain.enums.TicketType).values()}"
+                                    th:value="${type}" th:text="${type} + '  $' + ${type.price}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Tokens:</td>
+                <td>
+                    <label>
+                        <select th:field="*{tokensToApply}">
+                            <option selected disabled value="">Choose Tokens to Apply</option>
+                            <option th:each="tokenAmount:${#numbers.sequence(0, tokens)}"
+                                    th:text="${tokenAmount}" th:value="${tokenAmount}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Payment Card:</td>
+                <td>
+                    <label>
+                        <select th:field="*{paymentCardId}">
+                            <option selected disabled value="">Choose Payment Card</option>
+                            <option th:each="paymentCard:${paymentCards}" th:value="${paymentCard.id}"
+                                    th:disabled="${paymentCard.isExpired()}">
+                                <span th:if="${paymentCard.isExpired()}">
+                                    (Can't select this card, it's expired!)</span>
+                                <span> Last 4 Digits:</span>
+                                <span th:text="${paymentCard.cardNumber} + '; '"></span>
+                                <span> Type:</span>
+                                <span th:text="${paymentCard.paymentCardType} + '; '"></span>
+                                <span> Expiration Date:</span>
+                                <span th:text="${paymentCard.expirationDateFormatted()}"></span>
+                            </option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <input type="submit" value="submit">
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

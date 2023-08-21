@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/back-to-management-page :: back-to-management-page"></div>
+    <div th:insert="fragments/errors :: errors"></div>
+    <form method="get" th:action="@{/delete-showroom}" th:object="${showroomLetterForm}">
+        <table>
+            <tr>
+                <td>Choose Showroom:</td>
+                <td>
+                    <label>
+                        <select th:field="*{s}">
+                            <option th:each="showroomLetter:${showroomLetters}"
+                                    th:text="${showroomLetter}" th:value="${showroomLetter}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

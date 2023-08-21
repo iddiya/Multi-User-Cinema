@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/back-to-management-page :: back-to-management-page"></div>
+    <div th:insert="fragments/errors :: errors"></div>
+    <div class="bold-white-text" th:text="${success}"></div>
+    <ul id="pageNumbers" th:if="${totalPages > 0}">
+        <li th:each="pageNumber:${pageNumbers}">
+            <a class="btn btn-primary" th:classappend="${page == pageNumber ? 'active' : ''}"
+               th:text="${pageNumber}" th:href="@{/moderator-censorship(page=${pageNumber})}"></a>
+        </li>
+    </ul>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Is Censored</th>
+            <th>Censor/Uncensor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="censoredCustomer : ${censoredCustomers}">
+            <td th:text="${censoredCustomer.email}"></td>
+            <td th:text="${censoredCustomer.username}"></td>
+            <td th:text="${censoredCustomer.isCensored}"></td>
+            <td>
+                <form method="post" th:action="@{/set-customer-censor-status
+                         (page=${page},
+                         moderatorId=${moderatorId},
+                         customerId=${censoredCustomer.id},
+                         currentStatus=${censoredCustomer.isCensored})}">
+                    <input th:value="${censoredCustomer.isCensored} ?
+                    'Uncensor Account' : 'Censor Account'" type="submit">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

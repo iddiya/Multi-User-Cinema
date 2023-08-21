@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <div th:insert="fragments/success :: success"></div>
+    <br/>
+    <div th:if="${moderator == true}">
+        <h1 class="bold-white-text center-text">Moderator Management</h1>
+        <table>
+            <tbody>
+            <tr>
+                <td>Manage Censorship:</td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/moderator-censorship}">Censorship of Customers</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <div th:if="${admin == true}">
+        <h1 class="bold-white-text center-text">Admin Management</h1>
+        <table>
+            <tbody>
+            <tr>
+                <td>Manage Movies:</td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/add-movie}">Add New Movie</a></td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/edit-movie-search}">Edit Movie</a></td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/delete-movie-search}">Delete Movie</a></td>
+            </tr>
+            <tr>
+                <td>Manage Showrooms:</td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/add-showroom}">Add New Showroom</a></td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/choose-showroom-to-delete}">Delete Showroom</a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Manage Screenings:</td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/add-screening-search}">Add New Screening</a></td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/choose-screening-to-delete}">Delete Screening</a></td>
+            </tr>
+            <tr>
+                <td>User Management:</td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/admin-create-new-account}">Create New Account</a></td>
+                <td><a class="btn btn-outline-primary btn-block m-1"
+                       th:href="@{/admin-change-user-password}">Change User Password</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

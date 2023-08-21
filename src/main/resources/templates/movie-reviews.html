@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <a th:href="@{/movie-info(id=${movieId})}" class="btn btn-primary">Go Back to Movie Info Page</a>
+    <br/>
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <div th:if="${success != null}"><span th:text="${success}"></span></div>
+    <br/>
+    <div th:if="${userIsCustomer} and ${canWriteReview}">
+        <label>
+            <a th:href="@{/write-review(id=${movieId})}" class="btn btn-outline-primary">Write Review</a>
+        </label>
+    </div>
+    <br/>
+    <div>
+        <table class="table-hover">
+            <tr>
+                <td th:if="${totalPages > 0}" th:each="pageNumber:${pageNumbers}">
+                    <a th:href="@{/movie-reviews(id=${movieId},page=${pageNumber})}"
+                       class="btn btn-outline-primary" th:text="${pageNumber}"></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <div>
+        <table class="table table-bordered table-striped">
+            <tr th:each="review:${reviews}" th:if="${!review.isCensored}" style="border: red">
+                <td th:text="${review.writer}"></td>
+                <td th:text="${review.creationDateTimeFormatted()}"></td>
+                <td th:text="${review.review}"></td>
+                <td>
+                    <span th:text="${#lists.size(review.upvoteUserIds)} + ' likes'"></span>
+                    <form method="post" th:action="@{/vote-review/{id}/0(id=${review.id})}">
+                        <input th:disabled="${user == null} or ${!userIsCustomer} or ${review.userId == user.getId()}
+                               or ${#lists.contains(review.upvoteUserIds, user.getId())}"
+                               type="submit" value="Like" class="btn btn-success">
+                        <label><input hidden name="page" th:value="${page}"></label>
+                        <label><input hidden name="movieId" th:value="${movieId}"></label>
+                    </form>
+                    <span th:text="${#lists.size(review.downvoteUserIds)} + ' dislikes'"></span>
+                    <form method="post" th:action="@{/vote-review/{id}/1(id=${review.id})}">
+                        <input th:disabled="${user == null} or ${!userIsCustomer} or ${review.userId == user.getId()}
+                               or ${#lists.contains(review.downvoteUserIds, user.getId())}"
+                               type="submit" value="Dislike" class="btn btn-danger">
+                        <label><input hidden name="page" th:value="${page}"></label>
+                        <label><input hidden name="movieId" th:value="${movieId}"></label>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

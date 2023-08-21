@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <h1 class="bold-white-text center-text">Current Tickets</h1>
+    <br/>
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <div th:insert="fragments/success :: success"></div>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Showroom</th>
+            <th>Showtime</th>
+            <th>Endtime</th>
+            <th>Seat</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Time of Purchase</th>
+        </tr>
+        </thead>
+        <tr th:each="ticket:${tickets}">
+            <td th:text="${ticket.movieTitle}"></td>
+            <td th:text="${ticket.showroomLetter}"></td>
+            <td th:text="${ticket.showDateTimeFormatted()}"></td>
+            <td th:text="${ticket.endDateTimeFormatted()}"></td>
+            <td th:text="${ticket.seatDesignation}"></td>
+            <td th:text="${ticket.ticketTypeFormatted()}"></td>
+            <td th:text="${ticket.ticketStatus}"></td>
+            <td th:text="${ticket.creationDateTimeFormatted()}"></td>
+            <td th:if="${ticket.isRefundable}">
+                <table>
+                    <tr>
+                        <td>
+                            <a th:href="@{/refund-ticket(id=${ticket.id})}" class="btn btn-danger">Refund</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <div>
+        <form method="get" th:action="@{/past-tickets}">
+            <button class="btn btn-success">View Past Tickets</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

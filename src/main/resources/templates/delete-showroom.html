@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <form method="get" th:action="@{/choose-showroom-to-delete}">
+        <button class="btn btn-outline-primary">Go Back to Choose Showroom to Delete</button>
+    </form>
+    <br/>
+    <h1 class="bold-white-text center-text"
+        th:text="'Consequences of deleting Showroom ' + ${showroomLetterForm.s}"></h1>
+    <br/>
+    <ul class="list-group-flush">
+        <li th:each="info:${onDeleteInfo}" th:text="${info}"></li>
+    </ul>
+    <br/>
+    <form method="post" th:action="@{/delete-showroom/{showroomLetter}(showroomLetter=${showroomLetterForm.s})}">
+        <button class="btn btn-outline-danger" th:text="'I Absolutely Want to Delete Showroom '
+                         + ${showroomLetterForm.s} + ' With NO CHANCE OF UNDOING THIS ACTION!!!'"></button>
+    </form>
+    <br/>
+</div>
+</body>
+</html>

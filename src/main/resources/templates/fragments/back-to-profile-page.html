@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="back-to-profile-page">
+  <div class="container">
+    <label>
+      <form method="get" th:action="@{/user-profile}">
+        <button class="btn btn-primary">Back to Profile Page</button>
+      </form>
+    </label>
+  </div>
+</div>
+</body>
+</html>

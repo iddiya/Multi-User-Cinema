@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container" th:if="${user != null}">
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <div th:insert="fragments/success :: success"></div>
+    <br/>
+    <h1 class="bold-white-text center-text">Profile</h1>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tbody>
+        <tr>
+            <td>Username:</td>
+            <td th:text="${user.username}"></td>
+        </tr>
+        <tr>
+            <td>First name:</td>
+            <td th:text="${user.firstName}"></td>
+        </tr>
+        <tr>
+            <td>Last name:</td>
+            <td th:text="${user.lastName}"></td>
+        </tr>
+        <tr>
+            <td>Birth date:</td>
+            <td th:text="${user.birthdateFormatted()}"></td>
+        </tr>
+        <tr>
+            <td>Last Activity On:</td>
+            <td th:text="${user.lastActivityDateTimeFormatted()}"></td>
+        </tr>
+        <tr>
+            <td>Account Created On:</td>
+            <td th:text="${user.creationDateTimeFormatted()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <div>
+        <label>
+            <a class="btn btn-primary" th:href="@{/edit-user-profile}">Edit Profile</a>
+        </label>
+    </div>
+</div>
+</body>
+</html>

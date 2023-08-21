@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="webpage-top">
+    <nav class="naviBar" style="color: purple; font-size: x-large">
+        <a class="logo" th:href="@{/index}">
+            ECinema<span> Entertainment</span>
+        </a>
+        <a class="btn btn-outline-primary" th:href="@{/index}">Home</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a class="btn btn-outline-primary" th:href="@{/movies}">Movies</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <a class="btn btn-outline-primary" th:href="@{/about}">About</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <div class="dropdown show">
+            <a class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <span th:if="${user == null}">Login/Register</span>
+                <span th:unless="${user == null}" th:text="${user.username}"></span>
+            </a>
+            <div class="dropdown-menu">
+                <table class="table table-bordered table-striped">
+                    <tr th:each="option:${dropdownMenu}">
+                        <td>
+                            <form method="get" th:action="@{${option.second}}">
+                                <button class="btn btn-outline-success btn-block m-1"
+                                        th:text="${option.first}"></button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+    </nav>
+</div>
+</body>
+</html>

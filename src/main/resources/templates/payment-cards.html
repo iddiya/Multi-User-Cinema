@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <h1 class="bold-white-text center-text">Payment Cards</h1>
+    <br/>
+    <div>
+        <span th:if="${#lists.size(paymentCards)} < 5">
+            <form method="get" th:action="@{/add-payment-card}">
+                <button class="btn btn-success">Add Payment Card</button>
+            </form>
+        </span>
+        <span th:unless="${#lists.size(paymentCards)} < 5">
+            <h1 class="bold-white-text center-text">Cannot Add Any More Payment Cards.</h1>
+            <h1 class="bold-white-text center-text">Five is the MAX!</h1>
+        </span>
+    </div>
+    <br/>
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Card Type</th>
+                <th>Last 4 Digits</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Expiration Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="paymentCard:${paymentCards}">
+                <td th:text="${paymentCard.paymentCardType}"></td>
+                <td th:text="${paymentCard.cardNumber}"></td>
+                <td th:text="${paymentCard.firstName}"></td>
+                <td th:text="${paymentCard.lastName}"></td>
+                <td th:text="${paymentCard.expirationDateFormatted()}"></td>
+                <td>
+                    <div>
+                        <a th:href="@{/edit-payment-card(id=${paymentCard.id})}" class="btn btn-primary">Edit</a>
+                    </div>
+                    <br/>
+                    <form method="post" th:action="@{/delete-payment-card/{id}(id=${paymentCard.id})}">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:insert="fragments/header :: header"></div>
+    <script th:src="@{/js/cascading-form.js}"></script>
+</head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/back-to-management-page :: back-to-management-page"></div>
+    <br/>
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <form id="cascading-form" method="post"
+          th:action="@{/add-screening/{id}(id=${movie.id})}" th:object="${screeningForm}">
+        <div class="cascade-field">
+            <label for="field1">
+                <span class="bold-white-text">Showroom:</span>
+                <select id="field1" th:field="*{showroomId}">
+                    <option selected disabled value="">Select Showroom</option>
+                    <option th:each="showroom:${showrooms}"
+                            th:text="${showroom.showroomLetter}"
+                            th:value="${showroom.id}">
+                    </option>
+                </select>
+            </label>
+        </div>
+        <br/>
+        <div class="cascade-field">
+            <label for="field2">
+                <span class="bold-white-text">Show Date:</span>
+                <input id="field2" type="date" th:field="*{showdate}"
+                       th:value="${minDate}" th:min="${minDate}" th:max="${maxDate}">
+            </label>
+        </div>
+        <br/>
+        <div class="cascade-field">
+            <label for="field3">
+                <span class="bold-white-text">Showtime Hour:</span>
+                <select id="field3" th:field="*{showtimeHour}">
+                    <option selected disabled value="">Select Hour</option>
+                    <option th:text="12PM" th:value="12"></option>
+                    <option th:text="1PM" th:value="13"></option>
+                    <option th:text="2PM" th:value="14"></option>
+                    <option th:text="3PM" th:value="15"></option>
+                    <option th:text="4PM" th:value="16"></option>
+                    <option th:text="5PM" th:value="17"></option>
+                    <option th:text="6PM" th:value="18"></option>
+                    <option th:text="7PM" th:value="19"></option>
+                    <option th:text="8PM" th:value="20"></option>
+                    <option th:text="9PM" th:value="21"></option>
+                    <option th:text="10PM" th:value="22"></option>
+                    <option th:text="11PM" th:value="23"></option>
+                </select>
+            </label>
+        </div>
+        <br/>
+        <div class="cascade-field">
+            <label for="field4">
+                <span class="bold-white-text">Showtime Minute:</span>
+                <select id="field4" th:field="*{showtimeMinute}">
+                    <option selected disabled value="">Select Minute</option>
+                    <option th:text="00" th:value="0"></option>
+                    <option th:text="15" th:value="15"></option>
+                    <option th:text="30" th:value="30"></option>
+                    <option th:text="45" th:value="45"></option>
+                </select>
+            </label>
+        </div>
+        <br/>
+        <div class="cascade-field">
+            <label for="field5">
+                <input id="field5" type="submit" value="submit"/>
+            </label>
+        </div>
+    </form>
+</div>
+</body>
+</html>

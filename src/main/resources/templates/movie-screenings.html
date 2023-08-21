@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <a th:href="@{/movie-info(id=${movieId})}" class="btn btn-primary">Go Back to Movie Info Page</a>
+    <br/>
+    <table>
+        <tr>
+            <td th:each="pageNumber:${pageNumbers}">
+                <a th:href="@{/movie-screenings(id=${movieId},page=${pageNumber})}"
+                   class="btn btn-outline-primary" th:text="${pageNumber}"></a>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Showroom</th>
+            <th>Show Time</th>
+            <td>End Time</td>
+            <th>Seats Available</th>
+        </tr>
+        <tr th:each="screening:${screenings}">
+            <td th:text="${screening.showroomLetter}"></td>
+            <td th:text="${screening.showDateTimeFormatted()}"></td>
+            <td th:text="${screening.endDateTimeFormatted()}"></td>
+            <td th:text="${screening.seatsAvailable} + '/' + ${screening.totalSeatsInRoom}"></td>
+            <td th:if="${userIsCustomer}">
+                <a class="btn btn-primary" th:href="@{/view-seats(id=${screening.id})}">View Seats</a>
+            </td>
+            <td th:unless="${userIsCustomer}">
+                <span th:classappend="bold-white-text">Must be logged-in customer to book seats!</span>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

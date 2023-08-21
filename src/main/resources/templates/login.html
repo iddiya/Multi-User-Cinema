@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="login">
+    <h1>Login</h1>
+    <form method="post" th:action="@{/perform-login}">
+        <table>
+            <tbody>
+            <tr>
+                <td><label for="username">Email/Username:</label></td>
+                <td><input type="text" id="username" name="username" autofocus="autofocus" required/></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td><input type="password" id="password" name="password" autofocus="autofocus" required/></td>
+            </tr>
+            <tr>
+                <td><label><input type="submit" th:value="login"/></label></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <label>
+        <button class="btn btn-primary"><a th:href="@{/get-email-for-change-password}">
+            Forgot Password</a></button>
+    </label>
+    <label>
+        <button class="btn btn-primary"><a th:href="@{/submit-customer-registration}">
+            Register New Customer Account</a></button>
+    </label>
+    <br/>
+    <span class="text" th:if="${error} != null" th:text="${error}"></span>
+</div>
+</body>
+</html>

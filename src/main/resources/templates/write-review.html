@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div class="row">
+        <img th:src="${movie.image}" width="400" height="500" src="" alt="">
+    </div>
+    <br/>
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <form method="post" th:action="@{/write-review/{id}(id=${reviewForm.movieId})}" th:object="${reviewForm}">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Rating:</td>
+                <td>
+                    <label>
+                        <select th:field="*{rating}" required>
+                            <option th:each="r:${#numbers.sequence(1,10)}"
+                                    th:text="${r}" th:value="${r}">
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Review:</td>
+                <td>
+                    <label>
+                        <textarea rows="100" cols="100" style="height: 200px"
+                                  minlength="50" maxlength="1999" th:field="*{review}" type="text" required>
+                        </textarea>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

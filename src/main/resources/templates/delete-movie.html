@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/back-to-management-page :: back-to-management-page"></div>
+    <h1>Deletion of this movie is FINAL and IRREVERSIBLE!</h1>
+    <h1>Are you sure you want to delete this movie?</h1>
+    <br/>
+    <div>
+        <table class="table table-bordered table-striped">
+            <tr th:each="info:${onDeleteInfo}">
+                <td th:text="${info}"></td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <button class="button" id="toggle">Yes, I Want to Delete this Movie</button>
+</div>
+<div id="confirmed" class="container" style="display: none">
+    <h1>Click the button below to confirm deletion</h1>
+    <form method="post" th:action="@{/delete-movie/{id}(id=${movieId})}">
+        <label>
+            <button class="button">Delete</button>
+        </label>
+    </form>
+</div>
+<script>
+    const targetDiv = document.getElementById("confirmed");
+    const btn = document.getElementById("toggle");
+    btn.onclick = function () {
+        btn.style.display = "none";
+        targetDiv.style.display = "block";
+    };
+</script>
+</body>
+</html>

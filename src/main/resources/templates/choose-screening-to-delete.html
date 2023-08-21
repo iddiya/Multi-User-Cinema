@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div th:insert="fragments/back-to-management-page :: back-to-management-page"></div>
+<div class="container">
+    <h1 class="bold-white-text center-text">Screenings</h1>
+    <br/>
+    <div th:if="${success != null}">
+        <span class="bold-white-text center-text" th:text="${success}"></span>
+    </div>
+    <br/>
+    <form method="get" th:action="@{/choose-screening-to-delete(page=1)}">
+        <span class="bold-white-text">Search:</span>
+        <label for="search">
+            <input type="text" name="search" class="form-control"
+                   id="search" size="25" th:value="${search}" required>
+        </label>
+        <input type="submit" value="submit">
+    </form>
+    <br/>
+    <table class="table-hover">
+        <tr>
+            <td th:if="${totalPages > 0}" th:each="pageNumber:${pageNumbers}">
+                <a th:href="@{/choose-screening-to-delete(
+                           search=${search}, page=${pageNumber}, lettersChecked=${lettersChecked})}"
+                   class="btn btn-outline-primary" th:text="${pageNumber}"></a>
+            </td>
+        </tr>
+    </table>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Showroom</th>
+            <th>Movie</th>
+            <th>Show Time</th>
+            <td>End Time</td>
+            <td>Seats Available</td>
+            <td>Action</td>
+        </tr>
+        <tr th:each="screening:${screenings}">
+            <td th:text="${screening.showroomLetter}"></td>
+            <td th:text="${screening.movieTitle}"></td>
+            <td th:text="${screening.showDateTimeFormatted()}"></td>
+            <td th:text="${screening.endDateTimeFormatted()}"></td>
+            <td th:text="${screening.seatsAvailable} + '/' + ${screening.totalSeatsInRoom}"></td>
+            <td>
+                <a th:href="@{/delete-screening(id=${screening.id})}" class="btn btn-primary">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

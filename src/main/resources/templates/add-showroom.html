@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:insert="fragments/header :: header"></div>
+    <script th:src="@{/js/cascading-form.js}"></script>
+</head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="container">
+    <div th:insert="fragments/back-to-management-page :: back-to-management-page"></div>
+    <div th:insert="fragments/errors :: errors"></div>
+    <br/>
+    <form method="post" th:action="@{/add-showroom}" th:object="${showroomForm}">
+        <div class="cascade-field">
+            <label for="field1">
+                <span class="bold-white-text">Showroom Letter:</span>
+                <select id="field1" th:field="*{showroomLetter}">
+                    <option value="" selected disabled>Select Showroom Letter</option>
+                    <option th:each="showroomLetter:${availableShowroomLetters}"
+                            th:text="${showroomLetter}" th:value="${showroomLetter}">
+                    </option>
+                </select>
+            </label>
+        </div>
+        <br/>
+        <div class="cascade-field">
+            <label for="field2">
+                <span class="bold-white-text">Number of Rows:</span>
+                <select id="field2" th:field="*{numberOfRows}">
+                    <option value="" selected disabled>Select Number of Rows</option>
+                    <option th:each="number:${#numbers.sequence(1, 30)}"
+                            th:text="${number}" th:value="${number}">
+                    </option>
+                </select>
+            </label>
+        </div>
+        <br/>
+        <div class="cascade-field">
+            <label for="field3">
+                <span class="bold-white-text">Number of Seats Per Row:</span>
+                <select id="field3" th:field="*{numberOfSeatsPerRow}">
+                    <option value="" selected disabled>Select Number of Seats Per Row</option>
+                    <option th:each="number:${#numbers.sequence(1, 30)}"
+                            th:text="${number}" th:value="${number}">
+                    </option>
+                </select>
+            </label>
+        </div>
+        <br/>
+        <div class="cascade-field">
+            <label for="field4">
+                <input id="field4" type="submit" value="submit">
+            </label>
+        </div>
+    </form>
+</div>
+</body>
+</html>

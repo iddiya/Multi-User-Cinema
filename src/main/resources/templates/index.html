@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/header :: header"></head>
+<body>
+<nav th:insert="fragments/webpage-top :: webpage-top"></nav>
+<div class="moviesContainer">
+    <table class="table table-bordered table-dark">
+        <thead class="thead-dark">
+        <tr>
+            <th>
+                <span>WELCOME TO ECINEMA THEATERS!</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <a th:href="@{/movies}">
+                    <img alt="failed to load image" src="" th:src="@{/img/theater.jpeg}" width="875" height="500">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/movies}">
+                    <img alt="failed to load image" src="" th:src="@{/img/movies.png}" width="875" height="500">
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

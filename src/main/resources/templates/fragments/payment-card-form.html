@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="payment-card-form(action, paymentCardForm)">
+    <form method="post" th:action="@{${action}(id=${paymentCard.id})}" th:object="${paymentCardForm}">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Payment Card Type:</td>
+                <td>
+                    <label>
+                        <select th:field="*{paymentCardType}">
+                            <option value="" selected disabled>Select Payment Card Type</option>
+                            <option th:each="type:${T(com.ecinema.app.domain.enums.PaymentCardType).values()}"
+                                    th:value="${type}" th:text="${type}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Expiration Date:</td>
+                <td>
+                    <label>
+                        <input type="date" th:field="*{expirationDate}"
+                               th:value="${minDate}" th:min="${minDate}" th:max="${maxDate}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Payment Card Number:</td>
+                <td>
+                    <label>
+                        <input th:field="*{cardNumber}" type="password" maxlength="16" minlength="16"
+                               pattern="[0-9]*" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>First Name:</td>
+                <td>
+                    <label>
+                        <input th:field="*{firstName}" type="text" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>
+                    <label>
+                        <input th:field="*{lastName}" type="text" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Billing Address:</td>
+                <td>
+                    <span>Street:</span>
+                    <label>
+                        <input th:field="*{street}" type="text" required>
+                    </label>
+                    <br/>
+                    <span>City:</span>
+                    <label>
+                        <input th:field="*{city}" type="text" required>
+                    </label>
+                    <br/>
+                    <span>State:</span>
+                    <label>
+                        <select th:field="*{usState}">
+                            <option value="" selected disabled>State</option>
+                            <option th:each="state:${T(com.ecinema.app.domain.enums.UsState).values()}"
+                                    th:value="${state}" th:text="${state}"></option>
+                        </select>
+                    </label>
+                    <br/>
+                    <span>Zipcode:</span>
+                    <label>
+                        <input th:field="*{zipcode}" type="tel" pattern="[0-9]*" minlength="5" maxlength="5" required>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <input type="submit" value="submit">
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
